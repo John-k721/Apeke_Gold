@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews - Apeke Gold</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffdf5;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navigation Styles */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 16px;
+      background-color: goldenrod;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .navbar a:hover {
+      color: #333;
+    }
+
+    .reviews-section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .reviews-section h2 {
+      color: goldenrod;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .review-item {
+      border-bottom: 1px solid #eee;
+      padding: 20px 0;
+    }
+    .review-item:last-child {
+      border-bottom: none;
+    }
+    .review-item h3 {
+      color: #333;
+    }
+    .rating span {
+      font-size: 1.2rem;
+      color: goldenrod;
+    }
+    .stars {
+      display: flex;
+      gap: 5px;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    .star {
+      font-size: 24px;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+    .star.hover,
+    .star.selected {
+      color: goldenrod;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      resize: vertical;
+    }
+    button {
+      background-color: goldenrod;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #daa520;
+    }
+    .submitted-review {
+      margin-top: 20px;
+      background-color: #fff7e1;
+      padding: 10px;
+      border-left: 4px solid goldenrod;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="payment.html">Payment</a>
+    <a href="faq.html">FAQ</a>
+    <a href="returns.html">Returns</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+
+  <!-- Reviews Section -->
+  <div class="reviews-section">
+    <h2>Rate Us</h2>
+
+    <div class="review-item">
+      <h3>Elegant Gold Ring</h3>
+      <p>“I absolutely love this ring! The quality is amazing and it fits perfectly.” – Sarah T.</p>
+      <div class="rating">
+        <span>Rating: ★★★★☆</span>
+      </div>
+    </div>
+
+    <div class="review-item">
+      <h3>Classic Necklace</h3>
+      <p>“This necklace is gorgeous and has become my go-to piece for every outfit!” – Mike L.</p>
+      <div class="rating">
+        <span>Rating: ★★★★★</span>
+      </div>
+    </div>
+
+    <div class="review-item">
+      <h3>Leave Your Feedback</h3>
+      <textarea id="userFeedback" placeholder="Share your experience with us..." rows="4"></textarea>
+      
+      <div class="rating">
+        <span>Rate this product:</span>
+        <div class="stars" id="starRating">
+          <span class="star" data-value="1">★</span>
+          <span class="star" data-value="2">★</span>
+          <span class="star" data-value="3">★</span>
+          <span class="star" data-value="4">★</span>
+          <span class="star" data-value="5">★</span>
+        </div>
+      </div>
+
+      <button onclick="submitReview()">Submit Review</button>
+
+      <div id="reviewDisplay" class="submitted-review" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript for Star Rating -->
+  <script>
+    const stars = document.querySelectorAll('.star');
+    let selectedRating = 0;
+
+    stars.forEach((star) => {
+      star.addEventListener('mouseover', () => {
+        resetStars();
+        highlightStars(star.dataset.value);
+      });
+
+      star.addEventListener('mouseout', () => {
+        resetStars();
+        highlightStars(selectedRating);
+      });
+
+      star.addEventListener('click', () => {
+        selectedRating = star.dataset.value;
+        localStorage.setItem('selectedRating', selectedRating);
+        highlightStars(selectedRating);
+      });
+    });
+
+    function resetStars() {
+      stars.forEach(s => s.classList.remove('hover', 'selected'));
+    }
+
+    function highlightStars(count) {
+      for (let i = 0; i < count; i++) {
+        stars[i].classList.add('selected');
+      }
+    }
+
+    function submitReview() {
+      const feedback = document.getElementById('userFeedback').value;
+      if (!feedback || selectedRating == 0) {
+        alert("Please provide feedback and a rating.");
+        return;
+      }
+
+      const display = document.getElementById('reviewDisplay');
+      display.innerHTML = `
+        <strong>Your Review:</strong><br>
+        "${feedback}"<br>
+        <span style="color: goldenrod;">Rating: ${'★'.repeat(selectedRating)}${'☆'.repeat(5 - selectedRating)}</span>
+      `;
+      display.style.display = "block";
+
+      const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+      reviews.push({ text: feedback, rating: selectedRating });
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+
+      document.getElementById('userFeedback').value = '';
+      selectedRating = 0;
+      resetStars();
+    }
+
+    window.onload = () => {
+      const storedRating = localStorage.getItem('selectedRating');
+      if (storedRating) {
+        selectedRating = storedRating;
+        highlightStars(selectedRating);
+      }
+    };
+  </script>
+
+</body>
+</html>

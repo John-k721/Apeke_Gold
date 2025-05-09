@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Apeke Gold</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fffdf5;
+            color: #333;
+        }
+
+        header {
+            background: gold;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            margin-left: 1rem;
+            margin-top: 8px;
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: 0.2s ease;
+        }
+
+        nav a.active,
+        nav a:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease;
+        }
+
+        .contact-container h2 {
+            color: #b8860b;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .contact-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-container input,
+        .contact-container textarea {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .contact-container button {
+            padding: 0.75rem;
+            background: gold;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .contact-container button:hover {
+            background: #e6c200;
+        }
+
+        .bank-details {
+            margin-top: 2rem;
+            font-size: 1rem;
+            background: #fff8dc;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #222;
+            color: #fff;
+            margin-top: 3rem;
+        }
+
+        .social a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social a:hover {
+            color: gold;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width: 600px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            nav a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Apeke Gold</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="active">Contact</a>
+            <a href="payment.html">Payment</a>
+            <a href="faq.html">FAQ</a>
+            <a href="returns.html">Returns</a>
+            <a href="rate.html">Reviews</a>
+            <a href="cart.html">Cart</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="contact-container">
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <input type="text" placeholder="Your Name" required />
+                <input type="email" placeholder="Your Email" required />
+                <textarea rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+                <p id="successMessage" style="color: green; display: none; margin-top: 1rem;">Message sent successfully!
+                </p>
+            </form>
+
+
+            <div class="bank-details">
+                <h3>Bank Details</h3>
+                <p><strong>Account Name:</strong> Omowonuola Kehinde</p>
+                <p><strong>Account Number:</strong> 1764337344</p>
+                <p><strong>Bank Name:</strong> Access Bank</p>
+                <p><strong>Phone:</strong> 07082721767</p>
+                <p><strong>Email:</strong> <a
+                        href="mailto:Omowonuolakehinde1@gmail.com">Omowonuolakehinde1@gmail.com</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Apeke Gold | Your satisfaction is our concern</p>
+        <div class="social">
+            <a href="https://wa.me/2347082721767" target="_blank">WhatsApp</a>
+            <a href="mailto:Omowonuolakehinde1@gmail.com">Email</a>
+            <a href="https://www.youtube.com/@John-k721" target="_blank">YouTube</a>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent actual submission (no backend)
+
+            // Clear form fields (optional)
+            form.reset();
+
+            // Show success message
+            successMessage.style.display = 'block';
+
+            // Hide after 4 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 4000);
+        });
+    </script>
+
+</body>
+
+</html>

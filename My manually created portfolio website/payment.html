@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment | Apeke Gold</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fffdf5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: gold;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Active link styling similar to Contact page */
+    nav a.active {
+      color: #fff;
+      background-color: #b8860b;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #b8860b;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .payment-btn {
+      margin-top: 1rem;
+      padding: 0.9rem 2rem;
+      background: #b8860b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1.1rem;
+      transition: background 0.3s ease;
+    }
+
+    .payment-btn:hover {
+      background: #a77906;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #222;
+      color: #fff;
+      margin-top: 3rem;
+    }
+
+    /* Bank Transfer Instructions */
+    .bank-transfer-instructions {
+      display: none;
+      background: #f1f1f1;
+      padding: 1rem;
+      margin-top: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo"><strong>Apeke Gold</strong></div>
+    <nav>
+      <a href="index.html" id="homeLink">Home</a>
+      <a href="products.html" id="productsLink">Products</a>
+      <a href="about.html" id="aboutLink">About</a>
+      <a href="contact.html" id="contactLink">Contact</a>
+      <a href="payment.html" id="paymentLink">Payment</a>
+      <a href="faq.html" id="faqLink">FAQ</a>
+      <a href="returns.html" id="returnsLink">Returns</a>
+      <a href="rate.html" id="reviewsLink">Reviews</a>
+      <a href="cart.html" id="cartLink">Cart</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Complete Your Payment</h2>
+
+    <form id="paymentForm">
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" required>
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Amount (₦)</label>
+        <input type="number" id="amount" required>
+      </div>
+
+      <div class="form-group">
+        <label for="method">Payment Method</label>
+        <select id="method" required>
+          <option value="">-- Select Method --</option>
+          <option value="bank">Bank Transfer</option>
+          <option value="delivery">Pay on Delivery</option>
+        </select>
+      </div>
+
+      <button type="submit" class="payment-btn">Proceed</button>
+    </form>
+
+    <!-- Bank Transfer Instructions -->
+    <div class="bank-transfer-instructions" id="bankTransferInstructions">
+      <h4>Bank Transfer Instructions</h4>
+      <p>Please use the following bank details to complete your payment:</p>
+      <p><strong>Account Name:</strong> Omowonuola Kehinde</p>
+      <p><strong>Account Number:</strong> 1764337344</p>
+      <p><strong>Bank Name:</strong> Access Bank</p>
+      <p>Once payment is complete, kindly send the payment proof to our support team via WhatsApp at <strong><a
+            href="https://wa.me/+2347082721767">+2347082721767</a></strong> or email it to
+        <strong>Omowonuolakehinde1@gmail.com</strong>.</p>
+    </div>
+
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Apeke Gold | Your satisfaction is our concern</p>
+  </footer>
+
+  <script>
+    // Handle the form submission
+    document.getElementById("paymentForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Get form data
+      const fullname = document.getElementById('fullname').value;
+      const amount = document.getElementById('amount').value;
+      const method = document.getElementById('method').value;
+
+      if (!fullname || !amount || !method) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid amount!");
+        return;
+      }
+
+      if (method === 'bank') {
+        // Show bank transfer instructions
+        document.getElementById('bankTransferInstructions').style.display = 'block';
+        alert("You selected Bank Transfer. Please follow the instructions provided.");
+        return;
+      }
+
+      // Handle Pay on Delivery or other methods
+      alert('You have chosen ' + method + ' as your payment method. Thank you!');
+    });
+
+    // Activate the current page link
+    const currentPage = window.location.pathname.split("/").pop();
+    const activeLink = document.getElementById(currentPage.split(".")[0] + "Link");
+    if (activeLink) {
+      activeLink.classList.add("active");
+    }
+  </script>
+
+</body>
+
+</html>

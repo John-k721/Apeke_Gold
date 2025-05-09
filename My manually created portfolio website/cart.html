@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart | Apeke Gold</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #fffdf5; color: #333; }
+
+    header {
+      background: gold;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    nav a {
+      margin-left: 1.2rem;
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.2s ease;
+    }
+    nav a.active,
+    nav a:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #b8860b;
+    }
+
+    .cart-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .item-info {
+      flex: 1;
+      padding: 0 1rem;
+    }
+
+    .item-info h4 {
+      margin-bottom: 5px;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quantity input {
+      width: 50px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .item-total {
+      font-weight: bold;
+      color: #b8860b;
+    }
+
+    .remove-btn {
+      color: #ff4d4d;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 15px;
+      transition: 0.2s ease;
+    }
+
+    .remove-btn:hover {
+      color: #d11d1d;
+    }
+
+    .checkout-btn {
+      margin-top: 1rem;
+      padding: 0.8rem 2rem;
+      background: #b8860b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background: #a77906;
+    }
+
+    .total-amount-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #f9f9f9;
+      border: 2px solid #b8860b;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .total-amount-container span {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #b8860b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #222;
+      color: #fff;
+      margin-top: 3rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Apeke Gold</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="payment.html">Payment</a>
+      <a href="faq.html">FAQ</a> <!-- Added FAQ link -->
+      <a href="returns.html">Returns</a> <!-- Added Returns link -->
+      <a href="rate.html">Reviews</a> <!-- Added Reviews link -->
+      <a href="cart.html" class="active">Cart</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Your Shopping Cart</h2>
+    <div class="cart-container" id="cartContainer">
+      <!-- Cart items will be dynamically added here -->
+    </div>
+    <div class="total-amount-container">
+      <span>Total Amount:</span>
+      <span id="totalAmount">₦0.00</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Apeke Gold | Your satisfaction is our concern</p>
+  </footer>
+
+  <script>
+    const cartContainer = document.getElementById('cartContainer');
+    const totalAmountElement = document.getElementById('totalAmount');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    let cart = [];
+
+    function updateCart() {
+      cartContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = `<p>Your cart is empty.</p>`;
+        checkoutBtn.disabled = true;
+        totalAmountElement.textContent = '₦0.00';
+        return;
+      }
+
+      let totalAmount = 0;
+
+      cart.forEach((item, index) => {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+
+        cartItem.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <div class="item-info">
+            <h4>${item.name}</h4>
+            <p>Price: ₦${item.price.toFixed(2)}</p>
+            <div class="quantity">
+              Qty: <input type="number" min="1" value="${item.quantity}" data-index="${index}" class="qty"/>
+            </div>
+          </div>
+          <span class="remove-btn" data-index="${index}">Remove</span>
+        `;
+
+        cartContainer.appendChild(cartItem);
+
+        totalAmount += item.price * item.quantity;
+      });
+
+      totalAmountElement.textContent = `₦${totalAmount.toFixed(2)}`;
+      checkoutBtn.disabled = cart.length === 0;
+    }
+
+    cartContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('remove-btn')) {
+        const index = e.target.dataset.index;
+        cart.splice(index, 1);
+        updateCart();
+      }
+    });
+
+    cartContainer.addEventListener('input', (e) => {
+      if (e.target.classList.contains('qty')) {
+        const index = e.target.dataset.index;
+        const newQty = parseInt(e.target.value);
+        cart[index].quantity = newQty;
+        updateCart();
+      }
+    });
+
+    // Example items added to cart (You can dynamically add items here in your actual application)
+    cart = [
+      { name: 'Gold Ring', price: 15000, quantity: 1, img: 'https://images.unsplash.com/photo-1618354691249-2134190e3c5d?auto=format&fit=crop&w=100&q=80' },
+      { name: 'Gold Necklace', price: 35000, quantity: 1, img: 'https://images.unsplash.com/photo-1623428458420-6586b47d3ad4?auto=format&fit=crop&w=100&q=80' }
+    ];
+
+    updateCart(); // Call this to initialize the cart
+  </script>
+
+</body>
+</html>

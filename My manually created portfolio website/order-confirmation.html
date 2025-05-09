@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout | Apeke Gold</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fffdf5;
+      color: #333;
+      padding: 0;
+      margin: 0;
+    }
+
+    header {
+      background: gold;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #b8860b;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .summary-box {
+      background: #f9f3e8;
+      padding: 1rem;
+      margin-top: 2rem;
+      border-radius: 6px;
+    }
+
+    .summary-box p {
+      margin: 0.5rem 0;
+    }
+
+    .checkout-btn {
+      margin-top: 2rem;
+      padding: 0.9rem 2rem;
+      background: #b8860b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1.1rem;
+      transition: background 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background: #a77906;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #222;
+      color: #fff;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><strong>Apeke Gold</strong></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Checkout</h2>
+
+    <form id="checkoutForm">
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required />
+      </div>
+
+      <div class="form-group">
+        <label for="address">Delivery Address</label>
+        <textarea id="address" rows="3" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="payment">Payment Method</label>
+        <select id="payment" required>
+          <option value="">-- Choose an option --</option>
+          <option value="transfer">Bank Transfer</option>
+          <option value="card">Card Payment</option>
+          <option value="cod">Pay on Delivery</option>
+        </select>
+      </div>
+
+      <div class="summary-box">
+        <h3>Order Summary</h3>
+        <p>Gold Ring x 1 — <strong>₦15,000</strong></p>
+        <p>Gold Necklace x 1 — <strong>₦35,000</strong></p>
+        <p><strong>Total: ₦50,000</strong></p>
+      </div>
+
+      <button type="submit" class="checkout-btn">Confirm & Place Order</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Apeke Gold | Your satisfaction is our concern</p>
+  </footer>
+
+  <script>
+    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Order Placed Successfully! We'll contact you shortly.");
+      window.location.href = "index.html"; // or confirmation.html
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products | Apeke Gold</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #fff9f2; color: #333; }
+
+    header {
+      background: gold;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    nav a {
+      margin-left: 1.2rem;
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.2s ease;
+    }
+    nav a.active,
+    nav a:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .product-info h3 {
+      font-size: 1.1rem;
+    }
+    .price {
+      color: #b8860b;
+      font-weight: bold;
+    }
+    .quantity-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .quantity-container input {
+      width: 50px;
+      padding: 5px;
+      text-align: center;
+    }
+    .total-price {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .add-btn {
+      margin-top: 10px;
+      background: goldenrod;
+      color: #fff;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .add-btn:hover {
+      background: #daa520;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #222;
+      color: #fff;
+      margin-top: 3rem;
+    }
+    .social a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .faq-section, .returns-section, .reviews-section {
+      margin-top: 2rem;
+    }
+
+    .faq-item, .return-item, .review-item {
+      margin-bottom: 1.2rem;
+    }
+
+    @media(max-width: 600px) {
+      nav a { display: inline-block; margin: 0 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Apeke Gold</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="payment.html">Payment</a>
+      <a href="faq.html">FAQ</a>
+      <a href="returns.html">Returns</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Our Golden Collection</h1>
+    <div class="product-grid" id="productGrid">
+      <!-- Products will be inserted by JS -->
+    </div>
+
+    <div class="faq-section">
+      <h2>Frequently Asked Questions (FAQ)</h2>
+      <div class="faq-item">
+        <h3>What payment methods do you accept?</h3>
+        <p>We accept bank transfers, debit/credit cards, and PayPal for online orders.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I track my order?</h3>
+        <p>You will receive an email with tracking information once your order has shipped.</p>
+      </div>
+    </div>
+
+    <div class="returns-section">
+      <h2>Returns and Exchanges</h2>
+      <div class="return-item">
+        <h3>What is your return policy?</h3>
+        <p>We accept returns within 14 days of receiving your order. Please contact us to initiate a return.</p>
+      </div>
+      <div class="return-item">
+        <h3>How do I exchange an item?</h3>
+        <p>To exchange an item, please contact us with your order details and we will guide you through the process.</p>
+      </div>
+    </div>
+
+    <div class="reviews-section">
+      <h2>Customer Reviews</h2>
+      <div class="review-item">
+        <h3>Elegant Gold Ring</h3>
+        <p>“I absolutely love this ring! The quality is amazing and it fits perfectly.” – Sarah T.</p>
+      </div>
+      <div class="review-item">
+        <h3>Classic Necklace</h3>
+        <p>“This necklace is gorgeous and has become my go-to piece for every outfit!” – Mike L.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Apeke Gold | Your satisfaction is our concern</p>
+    <div class="social">
+      <a href="https://wa.me/2347082721767" target="_blank">WhatsApp</a>
+      <a href="mailto:Omowonuolakehinde1@gmail.com">Email</a>
+      <a href="https://www.youtube.com/@John-k721" target="_blank">YouTube</a>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      {
+        name: "Elegant Gold Ring",
+        price: 40000,
+        description: "This elegant gold ring adds a touch of luxury to any outfit.",
+        img: "aunty_wonu assest/first_gold.jpg"//https://images.unsplash.com/photo-1585247226809-1d0499a7cf93?auto=format&fit=crop&w=400&q=60
+      },
+      {
+        name: "Classic Necklace",
+        price: 65000,
+        description: "A classic gold necklace perfect for formal and casual wear.",
+        img: "aunty_wonu assest/second_gold.jpg"//https://images.unsplash.com/photo-1620121692029-cbe63696469e?auto=format&fit=crop&w=400&q=60
+      },
+      {
+        name: "Gold Bracelet",
+        price: 35000,
+        description: "This stylish gold bracelet complements any wrist.",
+        img: "aunty_wonu assest/third_gold.jpg"// https://images.unsplash.com/photo-1627920769641-b5d61d34d80d?auto=format&fit=crop&w=400&q=60"
+      },
+      {
+        name: "Shiny Earrings",
+        price: 28000,
+        description: "Shiny gold earrings that shine brightly on any occasion.",
+        img: "aunty_wonu assest/fourth_gold.jpg"// https://images.unsplash.com/photo-1618375531918-e7c588984166?auto=format&fit=crop&w=400&q=60
+      },
+      {
+        name: "Heart Pendant",
+        price: 30000,
+        description: "A delicate gold heart pendant that makes the perfect gift.",
+        img: "aunty_wonu assest/fifth_gold.jpg"// https://images.unsplash.com/photo-1606312611193-15f6d5d0e4ed?auto=format&fit=crop&w=400&q=60
+      },
+      {
+        name: "Golden Anklet",
+        price: 18000,
+        description: "A beautiful golden anklet that complements your summer style.",
+        img: "aunty_wonu assest/seventh_gold.jpg"// https://images.unsplash.com/photo-1606170032995-e0aa6b2ab7fb?auto=format&fit=crop&w=400&q=60
+      }
+    ];
+
+    const grid = document.getElementById("productGrid");
+
+    products.forEach((product, index) => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${product.img}" alt="${product.name}">
+        <div class="product-info">
+          <h3>${product.name}</h3>
+          <p class="price">₦${product.price.toLocaleString()}</p>
+          <p>${product.description}</p>
+          <div class="quantity-container">
+            <label for="qty-${index}">Qty:</label>
+            <input type="number" id="qty-${index}" value="1" min="1" />
+          </div>
+          <p class="total-price" id="total-${index}">Total: ₦${product.price.toLocaleString()}</p>
+          <button class="add-btn" onclick="updateCart(${index})">Add to Cart</button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    function updateCart(index) {
+      const qty = document.getElementById(`qty-${index}`).value;
+      const price = products[index].price;
+      const total = price * qty;
+      document.getElementById(`total-${index}`).textContent = `Total: ₦${total.toLocaleString()}`;
+      alert(`Added ${qty} × ${products[index].name} to cart\nTotal: ₦${total.toLocaleString()}`);
+    }
+  </script>
+
+</body>
+</html>
